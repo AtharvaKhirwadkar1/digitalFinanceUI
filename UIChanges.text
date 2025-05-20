@@ -1,0 +1,99 @@
+import Button from './buttons';
+import Field from './Field';
+
+function App() {
+  
+  const headers = [
+    { label: "lock", colSpan: 1 },
+    { label: "Units", colSpan: 1 },
+    { label: "Value", colSpan: 1 },
+    { label: "Funds Actions", colSpan: 3 },
+  ];
+
+  const rows = [
+    { chain: 'LBG Chain', units: '1m', value: '$5,000,000' },
+    { chain: 'Hedera', units: '500k', value: '$150,000' },
+    { chain: 'Canton', units: '250k', value: '$1,500,000' },
+  ];
+
+  return (
+    <div className="bg-gray-200 fixed inset-0 flex items-center justify-center">
+      <div className="bg-gradient-to-r from-gray-300 to-gray-500 p-8 rounded-lg shadow-lg flex flex-col items-center justify-center w-fit min-h-fit">
+        <h1 className="text-xl font-bold text-black text-center mb-8">
+          Total Balance: $1500
+        </h1>
+        
+        
+        <div className="grid grid-cols-6 gap-x-2 w-full text-center text-black font-semibold mb-4">
+          {headers.map((header, index) => (
+            <div
+              key={index}
+              className={
+                header.colSpan > 1
+                  ? `col-span-${header.colSpan} flex items-center justify-center`
+                  : 'w-40'
+              }
+            >
+              {header.label}
+            </div>
+          ))}
+        </div>
+
+        
+        <div className="flex flex-col gap-3 w-full">
+          {rows.map((row, index) => (
+            <div key={index} className="grid grid-cols-6 gap-x-2">
+              <Field content={row.chain} />
+              <Field content={row.units} />
+              <Field content={row.value} />
+              <Button label="ADD" bgColor="#A3BE8C" textColor="black" />
+              <Button label="WITHRAW" bgColor="#822F2F" textColor="white" />
+              <Button label="SWAP" bgColor="#4C6983" textColor="white" />
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+}
+
+export default App;
+
+
+import React from 'react';
+
+interface FieldProps {
+  content: string;
+}
+
+const Field: React.FC<FieldProps> = ({ content }) => {
+  return (
+    <div className="bg-white text-black rounded-lg p-2 text-center flex items-center justify-center w-40 h-12">
+      {content}
+    </div>
+  );
+};
+
+export default Field;
+
+
+import React from 'react';
+
+interface ButtonProps {
+  label: string;
+  bgColor: string;
+  textColor: string;
+}
+
+const Button: React.FC<ButtonProps> = ({ label, bgColor, textColor }) => {
+  return (
+    <button
+      className="rounded-lg flex items-center justify-center w-40 h-12 font-semibold"
+      style={{ backgroundColor: bgColor, color: textColor }}
+    >
+      {label}
+    </button>
+  );
+};
+
+export default Button;
