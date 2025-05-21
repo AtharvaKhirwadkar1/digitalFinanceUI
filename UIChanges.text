@@ -92,6 +92,7 @@ const Button: React.FC<ButtonProps> = ({ label, bgColor, textColor }) => {
       style={{ backgroundColor: bgColor, color: textColor }}
     >
       {label}
+      {label}
     </button>
   );
 };
